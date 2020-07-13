@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>手写 Promise</title>
+  <script src="HD.js"></script>
+</head>
+
+<body></body>
+<script>
+  // let promise = new HD((res, rej) => {
+  //   res("解决")
+  // })
+  // let p = promise.then(value => {
+  //   return p
+  // })
+  // HD.resolve("成功").then(value => {
+  //   console.log(value)
+  // })
+
+  /* all()  方法*/
+  // let p1 = new HD((resolve, reject) => {
+  //   setTimeout(() => {
+  //     resolve("后盾人")
+  //   }, 2000);
+  // })
+  // let p2 = new HD((resolve, reject) => {
+  //   setTimeout(() => {
+  //     resolve("HDCMS")
+  //   }, 1000);
+  // })
+  // HD.all([p1, p2]).then(
+  //   values => {
+  //     console.log(values)
+  //   },
+  //   reason => {
+  //     console.log(reason)
+  //   })
+
+  /* race()  方法*/
+  let p1 = new HD(resolve => {
+    setTimeout(() => {
+      resolve("后盾人")
+    }, 2000);
+  })
+  let p2 = new HD((resolve, reject) => {
+    setTimeout(() => {
+      reject("HDCMS")
+    }, 1000);
+  })
+  HD.race([p1, p2]).then(
+    values => {
+      console.log(values)
+    },
+    reason => {
+      console.log(reason)
+    })
+</script>
+
+</html>
